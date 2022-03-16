@@ -1,0 +1,16 @@
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# PM modules (install modules from dist.build)
+pm_modules/
+
+# Output of 'npm pack'
+*.tgz
+
+# SFTP config
+dist/sftp-config.json
+
+# Temp sources

@@ -1,0 +1,670 @@
+/* Colors */
+/* Placeholders */
+/**
+ * Remove optional as needed
+ */
+.simpleeditor {
+  /*important*/
+  white-space: pre-wrap;
+  /*important*/
+  white-space: break-spaces;
+  -webkit-font-variant-ligatures: none;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0;
+  /*IE Edge 18*/
+  position: relative;
+  /*disable mobile edits*/
+  -webkit-user-modify: read-write-plaintext-only;
+  user-modify: read-write-plaintext-only;
+  /*optional*/
+  outline: none;
+  /*-webkit-overflow-scrolling : touch !important; ???*/
+}
+/*IE resize bars will appear if child block elements have width/height property set*/
+.simpleeditor *:not(figure > img):not(figure > div):not(figure > svg):not(figure > svg > g):not(figure > svg > g > rect):not(figure > div > iframe):not(div.simpleeditor-menu-tooltip-icon > svg):not(hr) {
+  max-width: none !important;
+  max-height: none !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: auto !important;
+  min-height: auto !important;
+}
+.simpleeditor figure {
+  /*optional*/
+  text-align: center;
+}
+.simpleeditor figure .simpleeditor-selectednode {
+  -webkit-user-select: auto !important;
+}
+.simpleeditor figcaption {
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.simpleeditor figure div {
+  white-space: nowrap;
+  /*optional*/
+  cursor: default;
+  display: inline-block;
+  margin: 2.5px auto;
+  width: 100%;
+  position: relative;
+  padding: 0;
+  max-height: 500px;
+  box-sizing: border-box;
+}
+.simpleeditor figure svg,
+.simpleeditor figure img {
+  /*optional*/
+  max-height: 325px;
+  max-width: 100%;
+  vertical-align: middle;
+  cursor: default;
+  display: inline-block;
+  margin: 2.5px;
+  box-sizing: border-box;
+}
+/*only image or an image with caption*/
+.simpleeditor figure svg:only-child,
+.simpleeditor figure img:only-child,
+.simpleeditor figure img:first-child:nth-last-of-type(1) {
+  /*optional*/
+  max-height: 500px;
+  margin: 0;
+}
+/* fix img size when we still have svg placeholders in the figure*/
+.simpleeditor figure.simpleeditor-figure-build img:not(:only-child) {
+  max-height: 325px;
+  margin: 2.5px;
+}
+.simpleeditor-progressbar {
+  stroke: #ff5252;
+}
+.simpleeditor iframe {
+  pointer-events: none;
+  /*optional*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.simpleeditor-hideselection *::selection {
+  background: transparent;
+}
+.simpleeditor-hideselection *::-moz-selection {
+  background: transparent;
+}
+.simpleeditor-hideselection {
+  caret-color: transparent;
+}
+.simpleeditor-selectednode {
+  outline: 2px solid #ff5252;
+  cursor: move;
+  /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+/* Apply a "closed-hand" cursor during drag operation. */
+.simpleeditor-selectednode:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+li.simpleeditor-selectednode {
+  outline: none;
+}
+li.simpleeditor-selectednode:after {
+  content: "";
+  position: absolute;
+  left: -32px;
+  right: -2px;
+  top: -2px;
+  bottom: -2px;
+  border: 2px solid #ff5252;
+  pointer-events: none;
+}
+/* Make sure li selections wrap around markers */
+li.simpleeditor-selectednode {
+  outline: none;
+}
+li.simpleeditor-selectednode:after {
+  content: "";
+  position: absolute;
+  left: -32px;
+  right: -2px;
+  top: -2px;
+  bottom: -2px;
+  border: 2px solid #8cf;
+  pointer-events: none;
+}
+.simpleeditor-textblock-dropdown {
+  min-width: 3em;
+}
+.simpleeditor-menu {
+  margin: 0 -4px;
+  line-height: 1;
+}
+.simpleeditor-tooltip .simpleeditor-menu {
+  width: -webkit-fit-content;
+  width: fit-content;
+  white-space: pre;
+}
+.simpleeditor-menuitem {
+  margin-right: 3px;
+  display: inline-block;
+}
+.simpleeditor-menuseparator {
+  border-right: 1px solid #666;
+  margin-right: 3px;
+  line-height: 0.8em;
+  font-size: 18px;
+  vertical-align: middle;
+}
+.simpleeditor-menu-dropdown,
+.simpleeditor-menu-dropdown-menu {
+  font-size: 90%;
+  white-space: nowrap;
+}
+.simpleeditor-menu-dropdown {
+  vertical-align: 1px;
+  cursor: pointer;
+  position: relative;
+  padding-right: 15px;
+}
+.simpleeditor-menu-dropdown-wrap {
+  padding: 1px 0 1px 4px;
+  display: inline-block;
+  position: relative;
+}
+.simpleeditor-menu-dropdown:after {
+  content: "";
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid currentColor;
+  opacity: 0.6;
+  position: absolute;
+  right: 4px;
+  top: calc(50% - 2px);
+}
+.simpleeditor-menu-dropdown-menu,
+.simpleeditor-menu-submenu {
+  position: absolute;
+  background: white;
+  color: #666;
+  border: 1px solid #aaa;
+  padding: 2px;
+}
+.simpleeditor-menu-dropdown-menu {
+  z-index: 15;
+  min-width: 6em;
+}
+.simpleeditor-menu-dropdown-item {
+  cursor: pointer;
+  padding: 2px 8px 2px 4px;
+}
+.simpleeditor-menu-dropdown-item:hover {
+  background: #f2f2f2;
+}
+.simpleeditor-menu-submenu-wrap {
+  position: relative;
+  margin-right: -4px;
+}
+.simpleeditor-menu-submenu-label:after {
+  content: "";
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid currentColor;
+  opacity: 0.6;
+  position: absolute;
+  right: 4px;
+  top: calc(50% - 4px);
+}
+.simpleeditor-menu-submenu {
+  display: none;
+  min-width: 4em;
+  left: 100%;
+  top: -3px;
+}
+.simpleeditor-menu-active {
+  color: #ff5252;
+}
+.simpleeditor-menu-disabled {
+  opacity: 0.3;
+}
+.simpleeditor-menu-submenu-wrap:hover .simpleeditor-menu-submenu,
+.simpleeditor-menu-submenu-wrap-active .simpleeditor-menu-submenu {
+  display: block;
+}
+.simpleeditor-menubar {
+  border-radius: 3px;
+  position: absolute;
+  color: #FFF;
+  padding: 10px 5px 10px 8px;
+  border: 1px solid #000;
+  background: #000;
+  z-index: 100;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: visible;
+  white-space: nowrap;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.simpleeditor-menubar.menubar-bottom:before {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  left: var(--tooltip-left);
+  margin-left: -5px;
+  top: -6px;
+  border: 5px solid transparent;
+  border-top-width: 0;
+  border-bottom-color: #000;
+}
+/*
+.simpleeditor-menubar.menubar-bottom:after {
+  content: "";
+  height: 0; width: 0;
+  position: absolute;
+  left: var(--tooltip-left);
+  margin-left: -5px;
+  top: -4.5px;
+  border: 5px solid transparent;
+  border-top-width: 0;
+  border-bottom-color: #000;
+}
+*/
+.simpleeditor-menubar.menubar-top:before {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  left: var(--tooltip-left);
+  margin-left: -5px;
+  bottom: -6px;
+  border: 5px solid transparent;
+  border-bottom-width: 0;
+  border-top-color: #000;
+}
+/*
+.simpleeditor-menubar.menubar-top.top:after {
+  content: "";
+  height: 0; width: 0;
+  position: absolute;
+  left: var(--tooltip-left);
+  margin-left: -5px;
+  bottom: -4.5px;
+  border: 5px solid transparent;
+  border-bottom-width: 0;
+  border-top-color: #000;
+}
+*/
+.simpleeditor-icon {
+  display: inline-block;
+  line-height: 0.8;
+  vertical-align: middle;
+  padding: 2px 6px;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+.simpleeditor-menu-disabled.simpleeditor-icon {
+  cursor: default;
+}
+.simpleeditor-icon svg {
+  fill: currentColor;
+  height: 1em;
+}
+.simpleeditor-icon span {
+  vertical-align: text-top;
+}
+.simpleeditor-gapcursor {
+  display: none !important;
+  pointer-events: none !important;
+  position: absolute !important;
+}
+.simpleeditor-gapcursor:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -2px;
+  width: 20px;
+  border-top: 1px solid black;
+  animation: simpleeditor-cursor-blink 1.1s steps(2, start) infinite;
+}
+@keyframes simpleeditor-cursor-blink {
+  to {
+    visibility: hidden;
+  }
+}
+.simpleeditor-focused .simpleeditor-gapcursor {
+  display: block;
+}
+.simpleeditor-prompt {
+  background: white;
+  padding: 5px 10px 5px 15px;
+  border: 1px solid silver;
+  position: fixed;
+  border-radius: 3px;
+  z-index: 11;
+  box-shadow: -0.5px 2px 5px rgba(0, 0, 0, 0.2);
+}
+.simpleeditor-prompt h5 {
+  margin: 0;
+  font-weight: normal;
+  font-size: 100%;
+  color: #444;
+}
+.simpleeditor-prompt input[type="text"],
+.simpleeditor-prompt textarea {
+  background: #eee;
+  border: none;
+  outline: none;
+}
+.simpleeditor-prompt input[type="text"] {
+  padding: 0 4px;
+}
+.simpleeditor-prompt-close {
+  position: absolute;
+  left: 2px;
+  top: 1px;
+  color: #666;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+.simpleeditor-prompt-close:after {
+  content: "âœ•";
+  font-size: 12px;
+}
+.simpleeditor-invalid {
+  background: #ffc;
+  border: 1px solid #cc7;
+  border-radius: 4px;
+  padding: 5px 10px;
+  position: absolute;
+  min-width: 10em;
+}
+.simpleeditor-prompt-buttons {
+  margin-top: 5px;
+  display: none;
+}
+/**LINK-TOOLTIP*/
+.simpleeditor-tooltip-bottom,
+.simpleeditor-tooltip-top {
+  position: absolute;
+  cursor: pointer;
+  background: black;
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 7px 12px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  overflow-wrap: break-word;
+  -ms-word-wrap: break-word;
+  max-width: 300px;
+  font-weight: 400;
+  color: white;
+  background-color: #000;
+  font-style: normal;
+  z-index: 1000;
+}
+.simpleeditor-tooltip-bottom.dialog,
+.simpleeditor-tooltip-top.dialog {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 7px 4px 7px 12px;
+}
+.simpleeditor-tooltip-bottom:before {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  left: var(--tooltip-left);
+  /*50%;*/
+  margin-left: -5px;
+  top: -6px;
+  /*bottom: -6px;*/
+  border: 5px solid transparent;
+  border-top-width: 0;
+  border-bottom-color: #000;
+}
+/*
+  .simpleeditor-tooltip-bottom:after {
+    content: "";
+    height: 0; width: 0;
+    position: absolute;
+    left: var(--tooltip-left); 
+    margin-left: -5px;
+    top: -4.5px; 
+    border: 5px solid transparent;
+    border-top-width: 0;
+    border-bottom-color: #000;
+  }
+  */
+.simpleeditor-tooltip-top:before {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  left: var(--tooltip-left);
+  /*50%;*/
+  margin-left: -5px;
+  bottom: -6px;
+  border: 5px solid transparent;
+  border-bottom-width: 0;
+  border-top-color: #000;
+}
+/*
+  .simpleeditor-tooltip-top.top:after {
+    content: "";
+    height: 0; width: 0;
+    position: absolute;
+    left: var(--tooltip-left);
+    margin-left: -5px;
+    bottom: -4.5px;
+    border: 5px solid transparent;
+    border-bottom-width: 0;
+    border-top-color: #000;
+  }
+  */
+.simpleeditor-tooltip-bottom input,
+.simpleeditor-tooltip-top input {
+  border: none;
+  background-color: transparent;
+  min-width: 190px;
+  display: inline-block;
+  margin-right: 2px;
+  padding: 1px 0 0 0;
+  color: white;
+}
+.simpleeditor-tooltip-bottom input::-ms-clear,
+.simpleeditor-tooltip-top input::-ms-clear {
+  display: none;
+}
+.simpleeditor-tooltip-bottom input::selection,
+.simpleeditor-tooltip-top input::selection {
+  background: #ff5252;
+  color: #FFF;
+}
+.simpleeditor-tooltip-bottom input::-moz-selection,
+.simpleeditor-tooltip-top input::-moz-selection {
+  background: #ff5252;
+  color: #FFF;
+}
+.simpleeditor-tooltip-bottom button,
+.simpleeditor-tooltip-top button {
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 2px;
+  cursor: pointer;
+  border: none;
+}
+.simpleeditor-tooltip-bottom button .simpleeditor-menu-tooltip-icon svg,
+.simpleeditor-tooltip-top button .simpleeditor-menu-tooltip-icon svg {
+  fill: white;
+  width: 0.65em;
+}
+.simpleeditor-tooltip-bottom button:hover,
+.simpleeditor-tooltip-top button:hover {
+  color: #ff5252;
+}
+.simpleeditor-tooltip-bottom button:hover .simpleeditor-menu-tooltip-icon svg,
+.simpleeditor-tooltip-top button:hover .simpleeditor-menu-tooltip-icon svg {
+  fill: #ff5252;
+}
+.simpleeditor-tooltip-bottom input:focus,
+.simpleeditor-tooltip-top input:focus,
+.simpleeditor-tooltip-bottom button:focus,
+.simpleeditor-tooltip-top button:focus {
+  outline: none;
+}
+/*PLACEHOLDER for uploads*/
+.simpleeditor-embed-node::before,
+.simpleeditor-empty-node::before {
+  position: absolute;
+  color: #ddd;
+  cursor: text;
+}
+.simpleeditor-embed-node:hover::before,
+.simpleeditor-empty-node:hover::before {
+  color: #ccc;
+}
+.simpleeditor-empty-node:hover {
+  color: #aaa;
+}
+/*HANDLE ALL EMPTY BLOCKS*/
+/*.simpleeditor-empty-node:before,
+  .simpleeditor-empty-node:first-child::before {
+    content: 'Add Content...';
+  }*/
+.simpleeditor h1.simpleeditor-empty-node::before {
+  content: "Add Title\2026";
+}
+/*
+  .simpleeditor p.simpleeditor-empty-node::before {
+    content: 'temp\2026';
+  }
+  */
+/*.simpleeditor figcaption.simpleeditor-empty-node {
+    left: 0; right: 0;
+    position: absolute;
+    cursor: text;
+    max-width: none !important;
+    max-height: none !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: auto !important;
+    min-height: auto !important;
+  }*/
+.simpleeditor figcaption.simpleeditor-empty-node::before {
+  left: 0;
+  right: 0;
+  content: "Add Caption\2026";
+}
+@-moz-document url-prefix() {
+  .simpleeditor figcaption.simpleeditor-empty-node.simpleeditor-widget {
+    left: 0;
+    right: 0;
+    position: absolute;
+    cursor: text;
+  }
+}
+/**
+   * Hide placeholder if caret is present
+   */
+.simpleeditor h1.simpleeditor-empty-node-selected::before,
+.simpleeditor figcaption.simpleeditor-empty-node-selected::before {
+  content: '';
+}
+.simpleeditor figcaption.simpleeditor-empty-node {
+  cursor: text;
+}
+.simpleeditor p.simpleeditor-embed-node::before {
+  content: "Paste a YouTube or Vimeo link and press Enter\2026";
+}
+/** MENU TOOLTIP */
+.simpleeditor-menu-tooltip {
+  /* this covers all line so can't place caret in that line:
+    position: absolute;
+    color: #ccc;
+    left: 0; right: 0;
+    text-align: center;*/
+  position: absolute;
+  color: #ccc;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.simpleeditor-menu-tooltip button {
+  border: 1px solid #ccc;
+  background: transparent;
+  margin: 0 5px;
+  font-size: 21px;
+  line-height: 0.8em;
+  cursor: pointer;
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
+  padding: 3px !important;
+  outline: none;
+  margin-top: -1px;
+  /*fx*/
+  /*-webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;    */
+}
+.simpleeditor-menu-tooltip.focus button {
+  /*fx: js 500ms timeouted class*/
+  /*-webkit-transform: scale(1);
+      transform: scale(1);*/
+}
+.simpleeditor-menu-tooltip button:hover {
+  border: 1px solid #000;
+}
+.simpleeditor-menu-tooltip-icon {
+  display: inline-block;
+  line-height: 0.8;
+  padding: 2px 2px;
+}
+.simpleeditor-menu-tooltip-icon svg {
+  height: 1em;
+  fill: #ccc;
+}
+.simpleeditor-menu-tooltip button:hover svg {
+  fill: #000;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* Put your IE-only styles here. Works for IE 10 & IE 11*/
+  .simpleeditor-menubar.menubar-top:before,
+  .simpleeditor-menubar.menubar-bottom:before,
+  .simpleeditor-tooltip-top:before,
+  .simpleeditor-tooltip-bottom:before {
+    /*display: none;*/
+    left: 50%;
+  }
+}

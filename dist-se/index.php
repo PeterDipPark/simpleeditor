@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="utf8">
+	<link rel="stylesheet" href="css/se.css?v=<?=(int)($_SERVER["REQUEST_TIME"]).mt_rand()?>">
+</head>
+<body>
+	<div style="margin: 0px auto; padding: 0px 10px; width: 100%; display: block; max-width: 800px; box-sizing: border-box;">
+		<div id="editor" style="margin-bottom: 23px"></div>
+		<div style="display: none" id="content">
+		  <h3>Hello ProseMirror (Synced 2021/11/28)</h3>
+		  <p>TODO:</p>
+		  <ul>
+		  	<li>Clear spaces in empty paragraph so we can show block menu</li>
+		  	<li><p>Add comma after 1st link and hit space (comma shouldn't be added to link node):  (<a href="https://www.producthunt.com/posts/letterstack," target="_blank">https://www.producthunt.com/posts/letterstack</a>&nbsp;<a href="https://letterstack.co/" target="_blank">https://letterstack.co/</a>)</p></li>
+		  	<li><p>autoedit hyperlink if it is a link</p></li>
+		  </ul>
+		  <ul>
+		  	<li>Move single title to schema definition</li>
+		  </ul>
+		  <ul>
+		  	<li>Remove/Convert Figure with no content but caption only. Optionally add placeholder with relevant blockMenu options</li>
+		  </ul>
+		  <figure><figcaption>no media figure (test with paste, test at the end of doc.. etc.)</figcaption></figure>
+		  <ul>		  	
+		  	<li>Enter in figcaption - escape figure and create new paragraph</li>
+		  	<li>Create Tests</li>		  	
+		  	<li>Refactor Extension menu and link tooltip methods</li>	
+		  	<li>Refactor Keymap special cases</li>
+		  	<li>Refactor Autolink Input rule to match only real urls</li>
+		  	<li>Extend list option to convert ordered/unordered list (new icon &bullet;2---)</li>
+		  	<li>Create sticky menu for mobile (top/bottom - issue with virtual keyboard)</li>
+		  	<li>Store Pasted Images</li>
+		  	<li>Drop Content</li>
+		  	<li>Create Mark Down in/out</li>
+		  </ul>
+		  <hr>
+		  <p>Add new paragraph on Chrome and do quick triple space. It will change new paragraph to dot.</p>
+		  <hr>		  
+		  <p>This is editable text. You can focus it and start typing.</p>
+		  <ol><li><p>To apply styling, you can select a piece of text and manipulate its styling from the menu. The basic schema supports emphasis, <strong>strong text</strong>, <a href="http://marijnhaverbeke.nl/blog" target="_blank">links</a>.</p><p>asdlkjasd</p><p>asdkj</p><ol><li><p>HIT ENTER TWICE AT THE END OF THIS NODE and see below text disapear (this fixed now as split is called only if there is some content). Also we want to change list type via menu option or short code (*/n.)</p></li><li><p><strong>now double click at the end of this text</strong> to get empty selection a try to colapse li node (see console error). we should invalide such a selection. it might solve the problem with coordsAtPos as well.</p></li><li><p></p></li><li><p></p></li></ol><p>ada;lk</p><p>asd</p><ol><li><p>asd</p></li></ol><p>dasd</p><ul><li><p>asdasd</p></li></ul><p>asda</p><ol><li><p>asd</p></li></ol><ul><li><p>asdasd</p><ol><li><p><br></p></li></ol></li></ul></li></ol>
+		  <p>To apply styling, you can select a piece of text and manipulate
+		  its styling from the menu. The basic schema
+		  supports <em>emphasis</em>, <strong>strong
+		  text</strong>, <a href="http://marijnhaverbeke.nl/blog">links</a>.</p>
+		  <p>Block-level structure can be manipulated with key bindings (try
+		  ctrl-shift-2 to create a level 2 heading, or enter in an empty
+		  textblock to exit the parent block), or through the menu.</p>
+		  <p>Try using the “list” item in the menu to wrap this paragraph in
+		  a numbered list.</p>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	// WE NEED FETCH API
+	/*
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+	    xmlhttp = new XMLHttpRequest();
+	} else {
+	    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	};
+	xmlhttp.onreadystatechange = function() {
+	    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	        
+	        console.info("webflow xmlhttp", xmlhttp.responseText);
+	        // if (xmlhttp.getResponseHeader("Token")) {
+	        //     var data = xmlhttp.responseText;
+	        //     var element = document.createElement("script");
+	        //     element.text = "\n" + data + "\n";
+	        //     document.body.appendChild(element);
+	        //     xmlhttp = null;
+	        //     delete xmlhttp;
+	        // }
+	    };
+	};
+	xmlhttp.open("GET", "https://api.webflow.com/sites", true);
+	xmlhttp.setRequestHeader("Authorization", "Bearer 59c3f36a29a129b809c9e5464f5b2e2763d1a1253d5d7f76376b13a851189f28");
+	xmlhttp.setRequestHeader("Accept-Version", "1.0.0");
+	xmlhttp.send();
+
+	*/
+	</script>
+	<?php
+	/*
+	<script src="js/prosemirror-dev-tools.min.js"></script>
+	*/
+	?>
+	<script type="text/javascript" src="js/se.js?v=<?=(int)($_SERVER["REQUEST_TIME"]).mt_rand()?>"></script>
+	<script>
+		//						
+				// Something to consider for improvement
+
+					// see https://developer.mozilla.org/en-US/docs/Web/API if there is something we can use
+
+				// Class List 
+					if (!("classList" in document.createElement("_")) || document.createElementNS && !("classList" in document.createElementNS("http://www.w3.org/2000/svg","g"))) {
+						
+						// Get the first script element on the page
+						var ref = document.getElementsByTagName( 'script' )[ 0 ];
+						// Create a new script element
+						var script = document.createElement( 'script' );
+						// Set the script element `src`
+						script.src = 'js/classlist.js';
+						// Inject the script into the DOM
+						ref.parentNode.insertBefore( script, ref );
+					}
+				
+				// Promise
+					if(typeof Promise !== "undefined" && Promise.toString().indexOf("[native code]") !== -1){
+	                	// Browser supports Promise we use for Image upload previews
+	                } else {
+	                	// We need Promise polyfill to support Image upload previews
+	                	// e.g.: https://www.npmjs.com/package/promise-polyfill (should be ok to load only or IE 11)
+	                	
+	                	// Get the first script element on the page
+						var ref = document.getElementsByTagName( 'script' )[ 0 ];
+						// Create a new script element
+						var script = document.createElement( 'script' );
+						// Set the script element `src`
+						script.src = 'js/promise.js';
+						// Inject the script into the DOM
+						ref.parentNode.insertBefore( script, ref );
+	                }
+								
+				// HTML Callback
+					var exportHTML = function(new_html_)  {
+						// console.log("storree new html: ", new_html_)
+						// var ta = document.getElementById("out");
+						// ta.value = new_html_;
+					}
+
+
+				// Dummy Uploader
+					var uploadFiles = function(dom_, callback_, opt_remove_) {
+						
+						// Remove 
+							if (opt_remove_) {
+								//console.warn("cancel upload for: ", opt_remove_);
+								return;	
+							}
+
+						// Uploader vars
+							
+							var view_id = null;
+							var view_ids = [];							
+						    var uploaderUUID = 1;
+						    var fileUUID = 0;
+						
+						// File Input
+							let inputFile = document.createElement("input")
+						    inputFile.type = "file"
+						    inputFile.multiple = true;
+						    inputFile.style.display = "none";
+						    dom_.parentNode.appendChild(inputFile);						    
+
+						    // Input Change listener
+						    inputFile.addEventListener("change", function(e) {
+						    	var files = e.currentTarget.files;
+						    	
+						    	// Loop files						    
+						    	if (files.length!=0) {
+	 						    	// Open view changes
+								    	callback_("open", uploaderUUID);								    
+								    // add files								    	
+								    	for (var i = 0; i < files.length; i++) {
+								    		fileUUID = i;
+								    		view_id = callback_("add", {file:files[i], uploader: uploaderUUID, fileid: fileUUID } );
+								    		view_ids.push([view_id,files[i]]);
+								    	};								  								   
+								    // Close view changes
+								    	callback_("close", uploaderUUID);
+								}
+
+								// Tests 
+							    	setTimeout(function () { 
+							    		for (var i = 0; i < view_ids.length; i++) {
+							    			// test progress
+							    				callback_("progress", {id:view_ids[i][0],value:1});								    			
+							    		}
+							    	}, 100);
+							    	setTimeout(function () { 
+							    		for (var i = 0; i < view_ids.length; i++) {
+							    			// test success
+								    			callback_("update", {id:view_ids[i][0], url: URL.createObjectURL(view_ids[i][1]) });
+								    		// test fail
+								    			//callback_("remove", {id:view_ids[i][0]});
+								    	}
+								    }, 2100);
+
+						    });	
+
+						// Pass event
+							dom_.addEventListener("click", function(e) {
+							    // prevent event 
+								    e.preventDefault();
+									e.stopPropagation();						  
+							    
+								// open dialog							
+									inputFile.click(); 
+							    
+							});
+
+					}
+
+				// Buld Editor
+					var editor = se.create(
+									document.getElementById('editor')					// Editor dom element
+									, document.querySelector("#content").innerHTML		// Initial HTML String
+									, uploadFiles										// Uploader
+									, exportHTML										// HTML export callback method									
+									, false												// Callback scope. If not set or false editor object view will be the scope
+									, true												// Use ProseMirror DevTools (https://github.com/d4rkr00t/prosemirror-dev-tools)
+								);
+					
+				// Tests				
+					setTimeout(function(){								
+						// Destroy Editor
+							// editor.destroy(); 
+							// // Rebuild
+							// setTimeout(function(){ 
+							// 	var editor = se.create(
+							// 		document.getElementById('editor')					// Editor dom element
+							// 		, document.querySelector("#content").innerHTML		// Initial HTML String
+							// 		, uploadFiles										// Uploader
+							// 		, exportHTML										// HTML export callback method									
+							// 		, false												// Callback scope. If not set or false editor object view will be the scope
+							// 		, false												// Use ProseMirror DevTools (https://github.com/d4rkr00t/prosemirror-dev-tools)
+							// 	);
+							// }, 3000);
+						// Change html
+							// document.getElementById('editor').innerHTML = "New HMTL from DOM";
+							// editor.html("New HTML from editor object<br><br><br><br><br>");
+						// Get html
+							// console.log(editor.html());
+					}, 3000);
+		//
+		</script>
+</body>
+</html>

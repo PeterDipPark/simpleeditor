@@ -1,0 +1,189 @@
+#! /bin/bash
+set -e
+# Any subsequent(*) commands which fail will cause the shell script to exit immediately
+
+# Make executable
+# chmod u+x dist.build
+
+# Run
+# ./dist.build
+
+# Prompt
+echo "--------------------------------"
+echo "Build IIFE dist (js) file"
+echo "--------------------------------"
+echo "1. SE (wrapper)"
+echo "2. SE (se_modules + wrapper)"
+echo "3. SE (pm modules)"
+echo "100. PM basic example (wrapper)"
+echo "101. PM basic example (all)"
+echo "1000. Checkout PM Modules (see changes)"
+echo "1001. Update Modules (replace node and pm modules with latest releases)"
+echo "--------------------------------"
+echo "70. Test PM modules (all)"
+echo "--------------------------------"
+read -p "Select Script: " option
+echo "--------------------------------"
+
+# Build
+case $option in
+	1)
+		echo "Building SE (wrapper)..."
+		echo "--------------------------------"
+		npm run build-se-me
+	;;
+	2) 
+		echo "Building SE (se modules + wrapper)..."
+		echo "--------------------------------"
+		npm run build-se-se
+	;;
+	3) 
+		echo "Building SE (pm modules)..."
+		echo "--------------------------------"
+		npm run build-se-pm
+	;;
+	70) 
+		echo "Testing PM (all modules)..."
+		echo "--------------------------------"
+		npm run test-pm-all
+	;;
+	100)
+		echo "Building PM (wrapper)..."
+		echo "--------------------------------"
+		npm run build-pm-me
+	;;
+	101) 
+		echo "Building PM (all)..."
+		echo "--------------------------------"
+		npm run build-pm-all
+	;;
+	1000) 
+	echo "Checkout PM Modules..." 
+		echo "--------------------------------" 
+		echo "Checking prosemirror-model:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-model/.git fetch && git --git-dir=./pm_modules/prosemirror-model/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-state:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-state/.git fetch && git --git-dir=./pm_modules/prosemirror-state/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-transform:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-transform/.git fetch && git --git-dir=./pm_modules/prosemirror-transform/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-view:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-view/.git fetch && git --git-dir=./pm_modules/prosemirror-view/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-commands:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-commands/.git fetch && git --git-dir=./pm_modules/prosemirror-commands/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-schema-basic:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-schema-basic/.git fetch && git --git-dir=./pm_modules/prosemirror-schema-basic/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-schema-list:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-schema-list/.git fetch && git --git-dir=./pm_modules/prosemirror-schema-list/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-history:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-history/.git fetch && git --git-dir=./pm_modules/prosemirror-history/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-keymap:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-keymap/.git fetch && git --git-dir=./pm_modules/prosemirror-keymap/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-inputrules:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-inputrules/.git fetch && git --git-dir=./pm_modules/prosemirror-inputrules/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-gapcursor:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-gapcursor/.git fetch && git --git-dir=./pm_modules/prosemirror-gapcursor/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-example-setup:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-example-setup/.git fetch && git --git-dir=./pm_modules/prosemirror-example-setup/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-dropcursor:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-dropcursor/.git fetch && git --git-dir=./pm_modules/prosemirror-dropcursor/.git checkout master
+		echo "Checking prosemirror-test-builder:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-test-builder/.git fetch && git --git-dir=./pm_modules/prosemirror-test-builder/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking w3c-keyname:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/w3c-keyname/.git fetch && git --git-dir=./pm_modules/w3c-keyname/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking rope-sequence:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/rope-sequence/.git fetch && git --git-dir=./pm_modules/rope-sequence/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking prosemirror-menu:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/prosemirror-menu/.git fetch && git --git-dir=./pm_modules/prosemirror-menu/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking orderedmap:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/orderedmap/.git fetch && git --git-dir=./pm_modules/orderedmap/.git checkout master
+		echo "--------------------------------" 
+		echo "Checking crelt:"
+		echo "--------------------------------" 
+		git --git-dir=./pm_modules/crelt/.git fetch && git --git-dir=./pm_modules/crelt/.git checkout master
+
+	;;
+	1001) 
+	echo "Updating All Node Modules..." 
+		echo "--------------------------------" 
+		rm -rf node_modules
+		npm install rollup --save-dev
+		npm install --save-dev acorn@^6.0.0
+		npm install --save-dev rollup@^1.20.0
+		npm install --save-dev @rollup/plugin-buble
+		npm install --save-dev rollup-plugin-commonjs
+		npm install --save-dev @rollup/plugin-commonjs
+		npm install --save-dev @rollup/plugin-node-resolve
+		npm install --save-dev @rollup/plugin-replace
+		npm install --save-dev rollup-plugin-terser
+		echo "--------------------------------" 
+		echo "Updating PM Modules..." 
+		rm -rf pm_modules
+		mkdir pm_modules
+		cd pm_modules
+		git clone https://github.com/ProseMirror/prosemirror-model.git
+		git clone https://github.com/ProseMirror/prosemirror-state.git
+		git clone https://github.com/ProseMirror/prosemirror-transform.git
+		git clone https://github.com/ProseMirror/prosemirror-view.git
+		git clone https://github.com/ProseMirror/prosemirror-commands.git
+		git clone https://github.com/ProseMirror/prosemirror-schema-basic.git
+		git clone https://github.com/ProseMirror/prosemirror-schema-list.git
+		git clone https://github.com/ProseMirror/prosemirror-history.git
+		git clone https://github.com/ProseMirror/prosemirror-keymap.git
+		git clone https://github.com/ProseMirror/prosemirror-inputrules.git
+		git clone https://github.com/ProseMirror/prosemirror-gapcursor.git
+		git clone https://github.com/ProseMirror/prosemirror-example-setup.git
+		git clone https://github.com/ProseMirror/prosemirror-dropcursor.git
+		git clone https://github.com/ProseMirror/prosemirror-test-builder.git
+		git clone https://github.com/marijnh/w3c-keyname.git
+		git clone https://github.com/marijnh/rope-sequence.git
+		git clone https://github.com/ProseMirror/prosemirror-menu.git
+		git clone https://github.com/marijnh/orderedmap.git
+		git clone https://github.com/marijnh/crelt.git		
+		cd ..
+		echo "--------------------------------"
+		echo "All modules updated. Rebuild distros..."
+	;;
+	*)
+		echo "Invalid option..."
+	;;
+esac
+
+# Done
+echo "--------------------------------"
+echo "COMPLETED"
+echo "--------------------------------"	
+exit 1
